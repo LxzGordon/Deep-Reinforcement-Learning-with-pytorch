@@ -3,12 +3,9 @@ Practice for deep rl algorithms by a starter.All necessary parts of algorithm ar
 
 #2020-9-19
 ## implement. 
-### algorithm:
-
-1.DQN.  
-
-2.REINFORCE. 
-### components:
-
+### algorithm:  
+  1.DQN.  
+  2.REINFORCE. 
+### components:  
 1.experience replay
 
