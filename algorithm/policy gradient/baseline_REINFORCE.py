@@ -3,15 +3,18 @@ import torch as th
 import numpy as np
 import torch.nn as nn
 import torch.nn.functional as F
+import time
 
 alpha=0.001
 max_t=200
 gamma=0.9
 hidden=32
 env=gym.make('CartPole-v0')
+device="cuda"
 env=env.unwrapped
 n_action=env.action_space.n
 n_state=env.observation_space.shape[0]
+
 
 class policy(nn.Module):
     def __init__(self):
@@ -40,13 +43,13 @@ class Vnet(nn.Module):
 
 class baseline_REINFORCE():
     def __init__(self):
-        self.policy_net=policy()
-        self.V=Vnet()               #baseline
+        self.policy_net=policy().to(device)
+        self.V=Vnet().to(device)               #baseline
         self.g=0
         self.optimizerP=th.optim.Adam(self.policy_net.parameters(),lr=alpha)
         self.optimizerV=th.optim.Adam(self.V.parameters(),lr=alpha)
     def choose_action(self,s):
-        s=th.FloatTensor(s)
+        s=th.FloatTensor(s).to(device)
         a_prob=self.policy_net(s)
         rand=np.random.uniform()
         accumulation=0
@@ -67,7 +70,7 @@ class baseline_REINFORCE():
         v=th.zeros(timestep,1)
         self.g=0
         for i in reversed(range(timestep)):
-            s=th.FloatTensor(transition[i,0])
+            s=th.FloatTensor(transition[i,0]).to(device)
             a=transition[i,1][0]
             r=transition[i,2][0]
             v[i]=self.V(s)            #calculate b(s)
@@ -88,11 +91,10 @@ class baseline_REINFORCE():
         self.optimizerV.step()
 
 reinforce=baseline_REINFORCE()
-
-for episode in range(10000):
+start_time=time.time()
+for episode in range(1000):
     t=0
     s=env.reset()
-    transition=np.array([])
     total_reward=0
     while(t<300):
         a=reinforce.choose_action(s)
@@ -110,6 +112,8 @@ for episode in range(10000):
         t+=1
     if episode%100==0:
         print("Episode:"+format(episode)+",total score:"+format(total_reward))
+end_time=time.time()
+print(end_time-start_time)
 
 
     
