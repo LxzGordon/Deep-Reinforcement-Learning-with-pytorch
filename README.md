@@ -1,5 +1,5 @@
 # Deep-RL-with-pytorch
-Practice for deep reinforcement learning algorithms by a starter.All necessary parts of algorithm are written within one file.
+Practice for deep reinforcement learning algorithms by a starter.All necessary parts of algorithm are written within one file.Under active development.
 ## 2020-9-19 implement
 ### algorithm:  
   1.DQN.  
