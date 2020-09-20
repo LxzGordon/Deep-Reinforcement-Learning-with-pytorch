@@ -9,6 +9,7 @@ replay_memory_size=10000
 gamma=0.9
 target_update_iter=100
 env=gym.make('CartPole-v0')
+device="cuda"
 env=env.unwrapped
 n_action=env.action_space.n
 n_state=env.observation_space.shape[0]
@@ -58,30 +59,30 @@ class replay_memory():
     
 class DQN(object):
     def __init__(self):
-        self.eval_q_net,self.target_q_net=net(),net()
+        self.eval_q_net,self.target_q_net=net().to(device),net().to(device)
         self.replay_mem=replay_memory()
         self.iter_num=0
         self.optimizer=th.optim.Adam(self.eval_q_net.parameters(),lr=lr)
-        self.loss=th.nn.MSELoss()
+        self.loss=th.nn.MSELoss().to(device)
     def choose_action(self,qs):
         if np.random.uniform()<episilon:
             return th.argmax(qs).tolist()
         else:
             return np.random.randint(0,n_action)
     def greedy_action(self,qs):
-        return th.argmax(qs).numpy()
+        return th.argmax(qs)
     def learn(self):
         if(self.iter_num%target_update_iter==0):
             self.target_q_net.load_state_dict(self.eval_q_net.state_dict())
         self.iter_num+=1
 
         batch=self.replay_mem.sample()
-        b_s=th.FloatTensor(batch[:,0].tolist())
-        b_a=th.LongTensor(batch[:,1].astype(int).tolist())
-        b_r=th.FloatTensor(batch[:,2].tolist())
-        b_s_=th.FloatTensor(batch[:,3].tolist())
-        b_d=th.FloatTensor(batch[:,4].tolist())
-        q_target=th.zeros((batch_size,1))
+        b_s=th.FloatTensor(batch[:,0].tolist()).to(device)
+        b_a=th.LongTensor(batch[:,1].astype(int).tolist()).to(device)
+        b_r=th.FloatTensor(batch[:,2].tolist()).to(device)
+        b_s_=th.FloatTensor(batch[:,3].tolist()).to(device)
+        b_d=th.FloatTensor(batch[:,4].tolist()).to(device)
+        q_target=th.zeros((batch_size,1)).to(device)
         q_eval=self.eval_q_net(b_s)
         q_eval=th.gather(q_eval,dim=1,index=th.unsqueeze(b_a,1))
         q_next=self.target_q_net(b_s_).detach()
@@ -104,8 +105,9 @@ for episode in range(10000):
     r=0.0
     while(t<300):
         t+=1
-        qs=dqn.eval_q_net(th.FloatTensor(s))
+        qs=dqn.eval_q_net(th.FloatTensor(s).to(device))
         a=dqn.choose_action(qs)
+        s_,r,done,_=env.step(a)
         transition=[s.tolist(),a,[r],s_.tolist(),[done]]
         dqn.replay_mem.store_transition(transition)
         s=s_
@@ -122,8 +124,8 @@ for episode in range(10000):
             time=0
             while(time<300):
                 time+=1
-                t_qs=dqn.eval_q_net(th.FloatTensor(t_s))
-                t_a=dqn.greedy_action(t_qs)
+                t_qs=dqn.eval_q_net(th.FloatTensor(t_s).to(device))
+                t_a=dqn.greedy_action(t_qs).item()
                 ts_,tr,tdone,_=env.step(t_a)
                 t_r+=tr
                 if tdone:
