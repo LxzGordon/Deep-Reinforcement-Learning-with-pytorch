@@ -10,5 +10,5 @@ Practice for deep reinforcement learning algorithms by a starter.All necessary p
 ### algorithm:
   1.baseline-REINFORCE  
   2.Actor-Critic  
-    
-    Add CUDA support!
+  
+  Add CUDA support!
