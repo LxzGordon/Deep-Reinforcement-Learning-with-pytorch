@@ -9,6 +9,7 @@ max_t=200
 gamma=0.9
 hidden=32
 env=gym.make('CartPole-v0')
+device="cuda"
 env=env.unwrapped
 n_action=env.action_space.n
 n_state=env.observation_space.shape[0]
@@ -28,13 +29,12 @@ class policy(nn.Module):
 
 class REINFORCE():
     def __init__(self):
-        self.policy_net=policy()
+        self.policy_net=policy().to(device)
         self.g=0
         self.optimizer=th.optim.Adam(self.policy_net.parameters(),lr=alpha)
     def choose_action(self,s):
-        s=th.FloatTensor(s)
+        s=th.FloatTensor(s).to(device)
         a_prob=self.policy_net(s)
-        entropy=-(a_prob*a_prob.log()).sum()
         rand=np.random.uniform()
         accumulation=0
         action=0
@@ -43,16 +43,16 @@ class REINFORCE():
             if accumulation>=rand:
                 action=i
                 break
-        return action,entropy,rand
+        return action
 
-    def learn(self,transition,entropy):
+    def learn(self,transition):
         timestep=len(transition)
         loss=0
         returns=th.zeros(timestep,1)
         log_prob=th.zeros(timestep,1)
         self.g=0
         for i in reversed(range(timestep)):
-            s=th.FloatTensor(transition[i,0])
+            s=th.FloatTensor(transition[i,0]).to(device)
             a=transition[i,1][0]
             r=transition[i,2][0]
             log_prob[i]=th.log(self.policy_net(s))[a].unsqueeze(0)
@@ -72,9 +72,8 @@ for episode in range(10000):
     s=env.reset()
     transition=np.array([])
     total_reward=0
-    entropy=0
     while(t<300):
-        a,entro,rand=reinforce.choose_action(s)
+        a=reinforce.choose_action(s)
         s_,r,done,_=env.step(a)
         total_reward+=r
         trans=[s,[a],[r]]
@@ -83,7 +82,7 @@ for episode in range(10000):
         else:
             transition=np.vstack((transition,trans))
         if done:
-            reinforce.learn(transition,entropy)
+            reinforce.learn(transition)
             break
         s=s_
         t+=1
