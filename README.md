@@ -9,4 +9,6 @@ Practice for deep reinforcement learning algorithms by a starter.All necessary p
 ## 2020-9-20 implement
 ### algorithm:
   1.baseline-REINFORCE  
-  2.Actor-Critic
+  2.Actor-Critic  
+    
+    Add CUDA support!
