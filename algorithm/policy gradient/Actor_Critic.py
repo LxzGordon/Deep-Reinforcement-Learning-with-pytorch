@@ -7,8 +7,8 @@ import torch.nn.functional as F
 lr=0.001
 gamma=0.9
 hidden=32
-
 env=gym.make('CartPole-v0')
+device="cuda"
 env=env.unwrapped
 n_action=env.action_space.n
 n_state=env.observation_space.shape[0]
@@ -40,14 +40,14 @@ class critic(nn.Module):     #Q net
 
 class AC():
     def __init__(self):
-        self.actor=actor()
-        self.critic=critic()
+        self.actor=actor().to(device)
+        self.critic=critic().to(device)
 
         self.Aoptimizer=th.optim.Adam(self.actor.parameters(),lr=lr)
         self.Coptimizer=th.optim.Adam(self.critic.parameters(),lr=lr)
 
     def choose_action(self,s):
-        s=th.FloatTensor(s)
+        s=th.FloatTensor(s).to(device)
         a_prob=self.actor(s)
         rand=np.random.uniform()
         accumulation=0
@@ -60,7 +60,7 @@ class AC():
         return action
 
     def actor_learn(self,s,a,td_error):
-        s=th.FloatTensor(s)
+        s=th.FloatTensor(s).to(device)
         a_prob=self.actor(s)[a]
         loss=-(th.log(a_prob)*td_error.detach())
 
@@ -69,9 +69,9 @@ class AC():
         self.Aoptimizer.step()
 
     def critic_learn(self,transition):    #transition=[s,[r],[a],s_,[done]]
-        s=th.FloatTensor(transition[0])
+        s=th.FloatTensor(transition[0]).to(device)
         r=transition[1][0]
-        s_=th.FloatTensor(transition[3])
+        s_=th.FloatTensor(transition[3]).to(device)
         done=transition[4][0]
 
         v_eval=self.critic(s)
