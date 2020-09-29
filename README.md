@@ -12,3 +12,7 @@ Practice for deep reinforcement learning algorithms by a starter.All necessary p
   2.Actor-Critic  
   
   Add CUDA support!
+## 2020-9-29 implement
+### algorithm:
+  1.DDPG for continuous action space  
+  debugging DDPG for discrete action space...
