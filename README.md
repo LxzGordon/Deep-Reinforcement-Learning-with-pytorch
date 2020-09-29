@@ -1,6 +1,7 @@
 # Deep-RL-with-pytorch
 Practice for deep reinforcement learning algorithms by a starter.  
-Test environment is Gym-CartPolev0 for discrete action space and Gym-PendulmV0 for continuous action space.Under active development.
+Test environment is Gym-CartPolev0 for discrete action space and Gym-PendulmV0 for continuous action space.  
+Under active development.
 ## 2020-9-19 implement
 ### algorithm:  
   1.DQN  
