@@ -2,10 +2,7 @@
 Practice for deep reinforcement learning algorithms by a starter.  
 Test environment is Gym-CartPolev0 for discrete action space and Gym-PendulmV0 for continuous action space.  
 Under active development.
-## 2021-1-15 implement
-### algorithm:  
-  1.DoubleDQN  
-  2.DuelingDQN 
+
 ## 2020-9-19 implement
 ### algorithm:  
   1.DQN  
@@ -21,4 +18,7 @@ Under active development.
 ## 2020-9-29 implement
 ### algorithm:
   1.DDPG for continuous action space  
-  debugging DDPG for discrete action space...
+## 2021-1-15 implement
+### algorithm:  
+  1.DoubleDQN  
+  2.DuelingDQN 
