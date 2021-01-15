@@ -14,7 +14,7 @@ Under active development.
   1.baseline-REINFORCE  
   2.Actor-Critic  
   
-  Add CUDA support!
+  Add CUDA support
 ## 2020-9-29 implement
 ### algorithm:
   1.DDPG for continuous action space  
