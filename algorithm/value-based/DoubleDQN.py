@@ -92,7 +92,6 @@ class DQN(object):
             if(int(b_d[i].tolist()[0])==0):
                 #decouple action selection and action evaluation
                 action=th.argmax(q[i],0).detach()
-                #print(q)
                 #q_target[i]=b_r[i]+gamma*th.unsqueeze(th.max(q_next[i],0)[0],0) for DQN
                 q_target[i]=b_r[i]+gamma*q_next[i,action]
             else:
