@@ -20,5 +20,5 @@ Under active development.
   1.DDPG for continuous action space  
 ## 2021-1-15 implement
 ### algorithm:  
-  1.DoubleDQN  
-  2.DuelingDQN 
+  1.Double DQN  
+  2.Dueling DQN 
