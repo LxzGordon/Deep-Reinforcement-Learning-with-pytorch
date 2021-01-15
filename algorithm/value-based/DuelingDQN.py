@@ -56,7 +56,7 @@ class replay_memory():
         self.new=0
     def size(self):
         return self.memory.shape[0]
-#[s,a,r,s_,done]
+    #[s,a,r,s_,done]
     def store_transition(self,trans):
         if(self.memory.shape[0]<self.memory_size):
             if self.new==0:
