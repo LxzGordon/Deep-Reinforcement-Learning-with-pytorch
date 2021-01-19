@@ -1,7 +1,8 @@
 # Deep-RL-with-pytorch
 Practice for deep reinforcement learning algorithms by a starter.  
 Test environment is Gym-CartPolev0 for discrete action space and Gym-PendulmV0 for continuous action space.  
-Under active development.
+Under active development.  
+Including:DQN, REINFORCE, baseline-REINFORCE, Actor-Critic, Double DQN, Dueling DQN, Sarsa
 
 ## 2020-9-19 implement
 ### algorithm:  
@@ -22,3 +23,6 @@ Under active development.
 ### algorithm:  
   1.Double DQN  
   2.Dueling DQN 
+## 2021-1-19 implement
+### algorithm:  
+  1.Sarsa
