@@ -4,7 +4,7 @@ import numpy as np
 
 batch_size=50
 lr=0.001
-episilon=0.5
+episilon=0.9
 replay_memory_size=10000
 gamma=0.9
 target_update_iter=100
