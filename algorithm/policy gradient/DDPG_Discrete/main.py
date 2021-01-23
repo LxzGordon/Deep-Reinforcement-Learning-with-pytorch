@@ -3,7 +3,7 @@ import torch as th
 import numpy as np
 from gumbel_softmax import gumbel_softmax
 from model import Critic,Actor
-from experience_reply import replay_memory
+from experience_replay import replay_memory
 
 
 lr=0.001
