@@ -16,9 +16,6 @@ Including:DQN, REINFORCE, baseline-REINFORCE, Actor-Critic, Double DQN, Dueling 
   2.Actor-Critic  
   
   Add CUDA support
-## 2020-9-29 implement
-### algorithm:
-  1.DDPG for continuous action space  
 ## 2021-1-15 implement
 ### algorithm:  
   1.Double DQN  
