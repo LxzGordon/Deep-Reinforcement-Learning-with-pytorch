@@ -26,3 +26,7 @@ Including:DQN, REINFORCE, baseline-REINFORCE, Actor-Critic, Double DQN, Dueling 
 ## 2021-1-19 implement
 ### algorithm:  
   1.Sarsa
+## 2021-1-23 implement
+### algorithm:  
+  1.DDPG  
+  2.DDPG for discrete action space using gumbel softmax
