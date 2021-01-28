@@ -27,3 +27,9 @@ Including:DQN, REINFORCE, baseline-REINFORCE, Actor-Critic, Double DQN, Dueling 
 ### algorithm:  
   1.DDPG  
   2.DDPG for discrete action space using gumbel softmax
+## 2021-1-26 implement
+### algorithm:  
+  1.A2C
+## 2021-1-27 implement
+### algorithm:  
+  1.A3C
