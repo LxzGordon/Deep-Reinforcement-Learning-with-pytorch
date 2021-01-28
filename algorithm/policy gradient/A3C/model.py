@@ -58,7 +58,6 @@ class Worker(mp.Process):
                 buffer_r.append([r])
                 buffer_s_.append(s_)
                 buffer_d.append(done)
-                #print(done)
                 s=s_
                 total_step+=1
                 if total_step%update_interval==0 or done:
@@ -70,13 +69,12 @@ class Worker(mp.Process):
                         self.queue.append(total_reward)
                         if len(self.queue)==11:
                             del self.queue[0]
-                        #print(self.queue)
                         break
 
             self.cur_episode+=1
             if self.name=='Worker 0':
                 if self.cur_episode%10==0:
-                    #print(self.cur_episode,th.mean(th.Tensor(self.queue)))
-                    print(self.cur_episode,self.queue)
+                    print('Episode:',self.cur_episode,', last 10 episode mean reward of worker0:',th.mean(th.Tensor(self.queue)))
+
 
 
