@@ -2,7 +2,7 @@ import gym
 import torch as th
 import numpy as np
 from model import Critic,Actor
-from experience_reply import replay_memory
+from experience_replay import replay_memory
 
 
 lr=0.001
