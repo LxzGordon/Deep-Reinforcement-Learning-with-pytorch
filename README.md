@@ -33,3 +33,7 @@ Including:DQN, REINFORCE, baseline-REINFORCE, Actor-Critic, Double DQN, Dueling 
 ## 2021-1-27 implement
 ### algorithm:  
   1.A3C
+## 2021-2-4 implement
+### algorithm:  
+  1.TD3  
+  2.SAC
