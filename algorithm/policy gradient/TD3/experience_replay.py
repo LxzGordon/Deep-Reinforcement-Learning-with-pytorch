@@ -7,7 +7,7 @@ class replay_memory():
         self.new=0
     def size(self):
         return self.memory.shape[0]
-#[s,a,r,s_,done] make sure all info are lists, i.e. [[[1,2],[3]],[1],[0],[[4,5],[6]],[True]]
+#[s,a,r,s_,done] make sure all info are lists, i.e. [[[1,2],[3]],[1],[0],[[4,5],[6]],[True]] 
     def store(self,trans):
         if(self.memory.shape[0]<self.memory_size):
             if self.new==0:
