@@ -6,7 +6,6 @@ import torch.nn.functional as F
 import time
 from model import net,v
 
-
 delta=0.01
 
 alpha=0.001
