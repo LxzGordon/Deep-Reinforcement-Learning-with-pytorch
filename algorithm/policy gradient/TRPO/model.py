@@ -13,7 +13,6 @@ class net(nn.Module):
         s=th.relu(self.fc1(s))
         return self.softmax(self.fc2(s))
 
-
 class v(nn.Module):
     def __init__(self,n_state):
         super(v,self).__init__()
