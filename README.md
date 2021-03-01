@@ -37,3 +37,7 @@ Including:DQN, REINFORCE, baseline-REINFORCE, Actor-Critic, Double DQN, Dueling 
 ### algorithm:  
   1.TD3  
   2.SAC
+## 2021-2-25 implement
+### algorithm:  
+  1.TRPO(Natural Policy gradient).  
+  Unknown bug exists: Hessian matrix may not be positive definite at the beginning of training(But the training will usually converge)
